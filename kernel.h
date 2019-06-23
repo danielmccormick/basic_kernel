@@ -8,8 +8,8 @@ typedef unsigned int uint32_t;
 #define NULL 0
 
 // define vga buffer
-uint32_t *vga_buffer;
-#define VGA_ADDRESS 0x0B8000
+uint16_t *vga_buffer; // buffer is 16 bits ..
+#define VGAADDRESS 0x0B8000
 #define BUFSIZE 2200
 
 #endif
