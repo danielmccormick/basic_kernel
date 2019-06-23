@@ -30,7 +30,7 @@ stackTop:
 .global _start
 
 # Declares start function
-.type _start @function
+.type _start, @function
 
 # Startup functoin
 _start:

@@ -1,26 +1,26 @@
 #include "kernel.h"
 
 // set one entry
-short vga_entry(unsigned char c, unsigned char front_colour, unsigned char back_colour) {
-	unsigned char colour_bits = back_colour << 4; // Upper Bits will be background colour 
+uint32_t vga_entry(uint8_t c, uint8_t front_colour, uint8_t back_colour) {
+	uint8_t colour_bits = back_colour << 4; // Upper Bits will be background colour 
 	colour_bits |= front_colour;
-	unsigned short ax_reg = (colour_bits << 8);
+	uint32_t ax_reg = (colour_bits << 8);
 	ax_reg |= c;
 	return ax_reg;
 }
 
 // empty buffer
-void clear_vga_buffer(short **buff, unsigned char front, unsigned char back) {
-	short it; // Iterate through
+void clear_vga_buffer(uint16_t **buff, uint8_t front, uint8_t back) {
+	uint32_t it; // Iterate through
 	for (it = 0; it < BUFSIZE; it++) {
 		(*buff)[it] = vga_entry(0, front,back);
 	}
 }
 
 // initializer
-void vga_init(unsigned char front, unsigned char back) {
+void vga_init(uint8_t front, uint8_t back) {
 	vga_buffer = (void *)VGAADDRESS; // set ptr
-	clear_vga_buffer(*vga_buffer,front,back); // clear buffer
+	clear_vga_buffer(&vga_buffer,front,back); // clear buffer
 }
 
 void kernel_entry() {
