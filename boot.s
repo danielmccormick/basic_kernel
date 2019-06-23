@@ -36,8 +36,9 @@ stackTop:
 _start:
 	#move SP
 	mov $stackTop, %esp
-	# deadLoop until I write more lol
-	call deadLoop
+	call kernel_entry
+	cli
+
 # Loop forever
 deadLoop:
 	# Wait until interrupt
@@ -46,3 +47,5 @@ deadLoop:
 	cli
 	# Go back to deadLoop label
 	jmp deadLoop
+
+.size _start, . - _start
