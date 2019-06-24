@@ -1,4 +1,4 @@
-FLAGS = -m32 -nostdlib -fno-builtin -fno-exceptions -fno-leading-underscore -ffreestanding -Wall -Wextra
+FLAGS = -m32 -nostdlib -fno-builtin -fno-exceptions -fno-leading-underscore -ffreestanding -Wall -Wextra -shared
 TARGETS = boot.o kernel.o
 
 default: link

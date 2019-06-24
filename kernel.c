@@ -1,10 +1,10 @@
 #include "kernel.h"
 
 // set one entry
-uint32_t vga_entry(uint8_t c, uint8_t front_colour, uint8_t back_colour) {
+uint16_t vga_entry(uint8_t c, uint8_t front_colour, uint8_t back_colour) {
 	uint8_t colour_bits = back_colour << 4; // Upper Bits will be background colour 
 	colour_bits |= front_colour;
-	uint32_t ax_reg = (colour_bits << 8);
+	uint16_t ax_reg = (colour_bits << 8);
 	ax_reg |= c;
 	return ax_reg;
 }
@@ -23,7 +23,15 @@ void vga_init(uint8_t front, uint8_t back) {
 	clear_vga_buffer(&vga_buffer,front,back); // clear buffer
 }
 
+void printf(char *s) {
+	int i;
+	for (i = 0; s[i] != '\0'; i++) {
+		vga_buffer[i] = vga_entry(s[i],WHITE,BLACK);
+	}
+}
+
 void kernel_entry() {
-	vga_init(0,0);
-	vga_buffer[0] = vga_entry('A',1,0); // hope this all works
+	vga_init(WHITE,BLACK);
+	printf("Hello, World!\0");
+	return;
 }
