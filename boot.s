@@ -43,8 +43,6 @@ _start:
 deadLoop:
 	# Wait until interrupt
 	hlt
-	# Clear interrupt
-	cli
 	# Go back to deadLoop label
 	jmp deadLoop
 
