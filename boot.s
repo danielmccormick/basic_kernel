@@ -19,7 +19,7 @@
 stackBottom:
 
 # max size 4096 bytes
-.skip 4096
+.skip 1024
 
 stackTop:
 
@@ -36,14 +36,15 @@ stackTop:
 _start:
 	#move SP
 	mov $stackTop, %esp
+	# call kernel main
 	call kernel_entry
 	cli
 
 # Loop forever
-deadLoop:
+hcfLoop:
 	# Wait until interrupt
 	hlt
 	# Go back to deadLoop label
-	jmp deadLoop
+	jmp hcfLoop
 
 .size _start, . - _start
