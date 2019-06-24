@@ -1,3 +1,3 @@
-### This is a basic attempt at writing a simple kernel
+## Basic_Kernel : A Basic Attempt to Make A Kernel
 
-It's going to be running on QEMU. Will update the readme when something interesting is done.
+This is my first ever attempt at making a basic kernel.
