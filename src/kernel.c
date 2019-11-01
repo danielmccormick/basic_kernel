@@ -18,13 +18,14 @@ void update_game() {
 	for (x = 0; x < 80; x++) {
 		for (y = 0; y < 25; y++) {
 			size_t idx = 80*y+x;
-			if (game_buf[idx] = !game_buf[idx];
+			game_buf[idx] = !game_buf[idx];
 		}
 	}
 	return;
 }
 
 void game_of_life() {
+	update_game();
 	uint8_t x,y;
 	size_t idx;
 	for (x = 0; x < 80; x++) {
@@ -37,5 +38,5 @@ void game_of_life() {
 			}
 		}
 	}
-	sleep_n_cycles(1000000);
+	sleep_n_cycles(10000000);
 }
