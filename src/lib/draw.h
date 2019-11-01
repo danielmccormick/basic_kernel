@@ -49,7 +49,7 @@ void vga_init(uint8_t front, uint8_t back) {
 	clear_vga_buffer(&vga_buffer,front,back); // clear buffer
 }
 
-void printf(char *s) {
+void puts(char *s) {
 	int i;
 	for (i = 0; s[i]; i++) {
 		vga_buffer[i] = vga_entry(s[i],WHITE,BLACK);
@@ -57,6 +57,6 @@ void printf(char *s) {
 }
 
 void draw_unit_box(uint16_t x, uint16_t y, uint8_t colour) {
-    size_t index = 80*y+x;
-    vga_buffer[index] = vga_entry(218,colour,colour);
+    size_t index = (80*y)+x;
+    vga_buffer[index] = vga_entry(254,colour,colour);
 }

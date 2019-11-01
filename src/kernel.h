@@ -4,5 +4,6 @@
 #ifndef KERNEL_H
 #define KERNEL_H
 
-#endif
+uint8_t *game_buf = NULL;
 
+#endif

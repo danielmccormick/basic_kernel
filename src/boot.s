@@ -41,10 +41,10 @@ _start:
 	cli
 
 # Loop forever
-hcfLoop:
+gameLoop:
 	# Wait until interrupt
-	hlt
+	call game_of_life
 	# Go back to deadLoop label
-	jmp hcfLoop
+	jmp gameLoop
 
 .size _start, . - _start

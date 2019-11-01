@@ -22,3 +22,18 @@ void *memcpy(void *dst, const void *src, const size_t num) {
 	}
 	return dst;	
 }
+
+void *memset(void *str, const int c, const size_t n) {
+	if (!str) { return str; }
+	size_t cnt = 0;
+	while (cnt < n) { 
+		((unsigned char*)str)[cnt] = (unsigned char)c; 
+		cnt++;	
+	}
+	return str;
+}
+
+void sleep_n_cycles (size_t timer_count) {
+	timer_count >>= 1;
+	while(timer_count--) { asm volatile("nop"); }
+}
