@@ -1,4 +1,6 @@
 #include "kernel.h"
+#include "lib/utils.h"
+#include "lib/mman.c"
 
 // set one entry
 uint16_t vga_entry(uint8_t c, uint8_t front_colour, uint8_t back_colour) {

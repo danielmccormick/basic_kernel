@@ -7,8 +7,8 @@ typedef unsigned short uint16_t;
 typedef unsigned int uint32_t;
 typedef unsigned long uint64_t;
 typedef long int64_t;
-typedef size_t uint64_t;
-typedef ssize_t int64_t;
+typedef uint64_t size_t;
+typedef int64_t ssize_t;
 
 #define NULL 0
 

@@ -10,9 +10,10 @@ SECTIONS
 	{
 		_HEAP_START_ = .;
 		*(.heap)
+		_HEAP_END_ = .;
 		
 	}
-	. = 4M;	
+	. = 4M;
 	/* Text Block */
 	.text BLOCK(4K) : ALIGN (4K)
 	{ 

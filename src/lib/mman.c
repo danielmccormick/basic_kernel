@@ -1,8 +1,8 @@
-#include <mman.h>
+#include "mman.h"
 
 void mman_init() {
-	mman_head = _HEAP_START_;
-	mman_head->flags = MCHUNCK_INITIALIZED;
+	mman_head_ = _HEAP_START_;
+	mman_head_->flags = MCHUNK_INITIALIZED;
 }
 
 

@@ -1,5 +1,3 @@
-#include <kernel.h>
-
 #pragma once
 
 // Since this is all emulated, we'll be fiendishly tight on memory.
@@ -14,7 +12,7 @@ extern void *_HEAP_END_;
 
 typedef struct _chunk {
 	size_t size;
-	_chunk *next;
+	struct _chunk *next;
 	uint8_t flags; // Reserved
 	uint8_t data; // placeholder, all memory from &data to next  
 } _chunk_t;
