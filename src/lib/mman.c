@@ -1,5 +1,4 @@
 #include "mman.h"
-#include "utils.h"
 
 void mman_init() {
 	mman_head_ = _HEAP_START_;
@@ -34,7 +33,7 @@ void *malloc(size_t size) {
 	trav->size = size;
 	trav->flags &= (~MCHUNK_INITIALIZED);
 	trav->flags |= MCHUNK_ALLOCATED;
-	trav->next = &(_chunk_t *)((trav->data)+(char*)(min_chunk_size-1));
+	trav->next = (_chunk_t*)(&(trav->data)+(min_chunk_size-1));
 	return &(trav->data);
 }
 
