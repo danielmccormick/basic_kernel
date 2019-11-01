@@ -1,4 +1,5 @@
 #include "mman.h"
+#include "utils.h"
 
 void mman_init() {
 	mman_head_ = _HEAP_START_;

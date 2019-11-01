@@ -1,3 +1,4 @@
+#include "utils.h"
 #pragma once
 
 // Since this is all emulated, we'll be fiendishly tight on memory.
