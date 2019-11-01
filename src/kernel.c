@@ -2,6 +2,9 @@
 #include "lib/utils.h"
 #include "lib/mman.c"
 
+uint8_t game_buf[80][25];
+uint8_t double_buf[80][25];
+
 void kernel_entry() {
 	vga_init(WHITE,BLACK);
 	puts("Hello World");
@@ -9,17 +12,21 @@ void kernel_entry() {
 	uint8_t x,y;
 	for (x = 0; x < 80; x++) {
 		for (y = 0; y < 25; y++) {
-			game_buf[x][y] = 1;
+			game_buf[x][y] = 0;
+			double_buf[x][y] = 0;
 		}
 	}
 
-	/*game_buf[5][6] = 1;
+	game_buf[5][3] = 1;
+	game_buf[5][4] = 1;
+	game_buf[5][5] = 1;
+	game_buf[5][6] = 1;
 	game_buf[5][7] = 1;
 	game_buf[5][8] = 1;
 
 	game_buf[15][6] = 1;
 	game_buf[15][7] = 1;
-	game_buf[5][8] = 1;
+	game_buf[15][8] = 1;
 
 	game_buf[25][6] = 1;
 	game_buf[25][7] = 1;
@@ -31,7 +38,7 @@ void kernel_entry() {
 
 	game_buf[45][6] = 1;
 	game_buf[45][7] = 1;
-	game_buf[45][8] = 1;*/
+	game_buf[45][8] = 1;
 
 	return;
 }
@@ -40,18 +47,18 @@ int neighbours(int x, int y) {
 		// based on [x][y]
         int count = 0; 
         // behind
-        if (x > 0 && y > 0) count += game_buf[x-1][y-1];
-        if (x > 0) count += game_buf[x-1][y];
-        if (x > 0 && y < 24) count += game_buf[x-1][y+1];
+        if (x > 0 && y > 0 && game_buf[x-1][y-1]) { count++; } 
+        if (x > 0 && game_buf[x-1][y]) { count++; }
+        if (x > 0 && y < 24 && game_buf[x-1][y+1]) { count++; }
         
         // in line
-        if (y > 0) count += game_buf[x][y-1];
-        if (y < 24) count += game_buf[x][y+1];
+        if (y > 0 && game_buf[x][y-1]) { count++; }
+        if (y < 24 && game_buf[x][y+1]) { count ++; }
         
         // in front
-        if (x < 79 && y > 0) count += game_buf[x+1][y-1];
-        if (x < 79) count += game_buf[x+1][y];
-        if (x < 79 && y < 24) count += game_buf[x+1][y+1];
+        if (x < 79 && y > 0 && game_buf[x+1][y-1]) { count ++; }
+        if (x < 79 && game_buf[x+1][y]) { count ++; } 
+        if (x < 79 && y < 24 && game_buf[x+1][y+1] ) { count ++; }
         
         return count;        
 }
@@ -63,15 +70,24 @@ int neighbours(int x, int y) {
 				int res = neighbours(x,y);
                 if (game_buf[x][y] == 0) {
                     if (res == 3) {
-                        game_buf[x][y]=1;
-                    }
+                        double_buf[x][y] = 1;
+                    } else {
+						double_buf[x][y] = 0;
+					}
                 } else {
-                    if (!(res&2)) {
-                        game_buf[x][y]=0;
-                    }
+                    if (res != 2 && res != 3) {
+                        double_buf[x][y] = 0;
+                    } else {
+						double_buf[x][y] = 1;
+					}
                 }
             }
         }
+		 for (x = 0; x < 80; x++) {
+            for (y = 0; y < 25; y++) {
+				game_buf[x][y] = double_buf[x][y];
+			}
+		 }
         return;
 }
 
