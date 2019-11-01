@@ -12,26 +12,46 @@ void kernel_entry() {
 			game_buf[x][y] = 1;
 		}
 	}
+
+	/*game_buf[5][6] = 1;
+	game_buf[5][7] = 1;
+	game_buf[5][8] = 1;
+
+	game_buf[15][6] = 1;
+	game_buf[15][7] = 1;
+	game_buf[5][8] = 1;
+
+	game_buf[25][6] = 1;
+	game_buf[25][7] = 1;
+	game_buf[25][8] = 1;
+
+	game_buf[35][6] = 1;
+	game_buf[35][7] = 1;
+	game_buf[35][8] = 1;
+
+	game_buf[45][6] = 1;
+	game_buf[45][7] = 1;
+	game_buf[45][8] = 1;*/
+
 	return;
 }
 
 int neighbours(int x, int y) {
-		const uint8_t **board = game_buf;
-        // based on [x][y]
+		// based on [x][y]
         int count = 0; 
         // behind
-        if (x > 0 && y > 0) count += board[x-1][y-1];
-        if (x > 0) count += board[x-1][y];
-        if (x > 0 && y < 24) count += board[x-1][y+1];
+        if (x > 0 && y > 0) count += game_buf[x-1][y-1];
+        if (x > 0) count += game_buf[x-1][y];
+        if (x > 0 && y < 24) count += game_buf[x-1][y+1];
         
         // in line
-        if (y > 0) count += board[x][y-1];
-        if (y < 24) count += board[x][y+1];
+        if (y > 0) count += game_buf[x][y-1];
+        if (y < 24) count += game_buf[x][y+1];
         
         // in front
-        if (x < 79 && y > 0) count += board[x+1][y-1];
-        if (x < 79) count += board[x+1][y];
-        if (x < 79 && y < 24) count += board[x+1][y+1];
+        if (x < 79 && y > 0) count += game_buf[x+1][y-1];
+        if (x < 79) count += game_buf[x+1][y];
+        if (x < 79 && y < 24) count += game_buf[x+1][y+1];
         
         return count;        
 }
@@ -69,7 +89,7 @@ void render_game_buf() {
 }
 
 void game_of_life() {
-	update_game();
 	render_game_buf();
 	sleep_n_cycles(10000000);
+	update_game();
 }
