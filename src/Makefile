@@ -19,6 +19,9 @@ kernel.o: kernel.c
 boot.o: boot.s
 	as --32 boot.s -o boot.o
 
+run: package
+	qemu-system-x86_64 -cdrom BasicOS.iso
+
 .PHONY: clean
 clean: 
 	rm -f *.o *.out *.iso *.bin

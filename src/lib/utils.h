@@ -24,7 +24,7 @@ void *memcpy(void *dst, const void *src, const size_t num) {
 }
 
 void *memset(void *str, const int c, const size_t n) {
-	if (!str) { return str; }
+	if (!str || !n) { return str; }
 	size_t cnt = 0;
 	while (cnt < n) { 
 		((unsigned char*)str)[cnt] = (unsigned char)c; 
@@ -34,6 +34,6 @@ void *memset(void *str, const int c, const size_t n) {
 }
 
 void sleep_n_cycles (size_t timer_count) {
-	timer_count >>= 1;
+	timer_count >>= 2;
 	while(timer_count--) { asm volatile("nop"); }
 }
