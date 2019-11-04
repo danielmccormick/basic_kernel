@@ -24,4 +24,4 @@ run: package
 
 .PHONY: clean
 clean: 
-	rm -f *.o *.out *.iso *.bin
+	rm -rf *.o *.out *.iso *.bin isodir
